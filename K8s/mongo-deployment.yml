@@ -12,23 +12,25 @@ spec:
     metadata:
       name: mongodb-pod
       namespace: chat-app
-      labels: 
+      labels:
         app: mongodb
     spec:
       containers:
-      - name: chatapp-mongodb
+      - name: chat-app-mongodb
         image: mongo:latest
+       # resources:
+        #  limits:
+         #   memory: "128Mi"
+          #  cpu: "500m"
         ports:
         - containerPort: 27017
-        env:
+        env: 
         - name: MONGO_INITDB_ROOT_USERNAME
           value: mongoadmin
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: secret
       volumes:
-      - name: mongo-data
-        persistentVolumeClaim:
-          claimName: mongodb-pvc   
-
-
+      - name: mongodb-data
+        persistentVolumeClaim: 
+          claimName: mongodb-pvc
 

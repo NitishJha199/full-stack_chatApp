@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-deployment
-  namespace: chat-app
+  namespace : chat-app
 spec:
   replicas: 1
   selector:
@@ -12,15 +12,19 @@ spec:
     metadata:
       name: backend-pod
       namespace: chat-app
-      labels: 
+      labels:
         app: backend
     spec:
       containers:
-      - name: chatapp-backend
-        image: trainwithshubham/chatapp-backend:latest
+      - name: chat-app-backend
+        image: nitish69/chat-app-backend
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
         ports:
         - containerPort: 5001
-        env:
+        env: 
         - name: NODE_ENV
           value: production
         - name: MONGODB_URI
